@@ -1,45 +1,19 @@
 {
   "version": 2,
-  "projects": [
+  "builds": [
     {
-      "rootDirectory": "frontend",
-      "buildCommand": "npm install && npm run build",
-      "outputDirectory": "frontend/build",
-      "devCommand": "npm run dev",
-      "name": "byklab-frontend"
-    },
-    {
-      "rootDirectory": "backend",
-      "buildCommand": "npm install && npm run build",
-      "outputDirectory": "backend/dist",
-      "devCommand": "npm run dev",
-      "name": "byklab-backend",
-      "routes": [
-        {
-          "src": "/api/(.*)",
-          "dest": "backend/dist/api/$1"
-        }
-      ]
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/api/$1"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
       "dest": "/frontend/$1"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "DATABASE_URL": "@database_url",
-    "API_KEY": "@api_key"
-  },
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
+  ]
 }
